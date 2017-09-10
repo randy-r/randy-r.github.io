@@ -31459,20 +31459,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var MAX_RECURSION_LIMIT = 6;
-var totalTriangles = [].concat(_toConsumableArray(Array(MAX_RECURSION_LIMIT).keys())).map(function (i) {
+var MAX_POSSIBLE_TRIANGLES = [].concat(_toConsumableArray(Array(MAX_RECURSION_LIMIT).keys())).map(function (i) {
   return 3 ** i;
 }).reduce(function (a, b) {
   return a + b;
-}); // (3 ** (MAX_RECURSION_LIMIT));
-var colorDenominator = totalTriangles;
+});
+var colorDenominator = MAX_POSSIBLE_TRIANGLES;
+var crtRecursionLimitTotalTriangles = 0;
 var crtTotalTriangles = 0;
 
 var InnerLines = function InnerLines(_ref) {
   var triangle = _ref.triangle,
       crtRecDepth = _ref.crtRecDepth,
-      recursionLimit = _ref.recursionLimit;
+      recursionLimit = _ref.recursionLimit,
+      trianglesLimit = _ref.trianglesLimit;
 
-  if (crtRecDepth >= MAX_RECURSION_LIMIT || crtRecDepth >= recursionLimit) {
+  if (crtRecDepth >= MAX_RECURSION_LIMIT || crtRecDepth >= recursionLimit || crtTotalTriangles >= trianglesLimit) {
     return null;
   }
 
@@ -31498,9 +31500,9 @@ var InnerLines = function InnerLines(_ref) {
     'g',
     null,
     _react2.default.createElement('path', { d: pathData, fill: color, stroke: 'none' }),
-    _react2.default.createElement(InnerLines, { triangle: triangleA, crtRecDepth: newRecDepth, recursionLimit: recursionLimit }),
-    _react2.default.createElement(InnerLines, { triangle: triangleB, crtRecDepth: newRecDepth, recursionLimit: recursionLimit }),
-    _react2.default.createElement(InnerLines, { triangle: triangleC, crtRecDepth: newRecDepth, recursionLimit: recursionLimit })
+    _react2.default.createElement(InnerLines, { triangle: triangleA, crtRecDepth: newRecDepth, recursionLimit: recursionLimit, trianglesLimit: trianglesLimit }),
+    _react2.default.createElement(InnerLines, { triangle: triangleB, crtRecDepth: newRecDepth, recursionLimit: recursionLimit, trianglesLimit: trianglesLimit }),
+    _react2.default.createElement(InnerLines, { triangle: triangleC, crtRecDepth: newRecDepth, recursionLimit: recursionLimit, trianglesLimit: trianglesLimit })
   );
 };
 
@@ -31521,15 +31523,24 @@ var InitialTriangle = function (_React$Component) {
 
       var mapXFunc = (0, _d.scaleQuantize)().domain([0, _this.side]).range([].concat(_toConsumableArray(Array(MAX_RECURSION_LIMIT + 1).keys())));
 
+      var mapYFunc = (0, _d.scaleQuantize)().domain([20, _this.height]).range([].concat(_toConsumableArray(Array(crtRecursionLimitTotalTriangles + 1).keys())).reverse());
+
       var newRecursionLimit = mapXFunc(x);
+      var newTrianglesLimit = mapYFunc(y);
+
+      crtRecursionLimitTotalTriangles = newRecursionLimit === 0 ? 0 : [].concat(_toConsumableArray(Array(newRecursionLimit).keys())).map(function (i) {
+        return 3 ** i;
+      }).reduce(function (a, b) {
+        return a + b;
+      });
 
       crtTotalTriangles = 0;
-      _this.setState({ recursionLimit: newRecursionLimit });
+      _this.setState({ recursionLimit: newRecursionLimit, trianglesLimit: newTrianglesLimit });
       _this.inProgress = false;
     };
 
-    _this.state = { recursionLimit: 1 };
-    _this.side = 400;
+    _this.state = { recursionLimit: 1, trianglesLimit: 1 };
+    _this.side = 600;
     _this.height = Math.cos(Math.PI / 6) * _this.side;
     return _this;
   }
@@ -31542,9 +31553,9 @@ var InitialTriangle = function (_React$Component) {
       var side = this.side;
       var height = this.height;
       var initialTriangle = {
-        A: { x: 0, y: height },
-        B: { x: side, y: height },
-        C: { x: side / 2, y: 0 }
+        A: { x: 0, y: 10 + height },
+        B: { x: side, y: 10 + height },
+        C: { x: side / 2, y: 10 }
       };
       var A = initialTriangle.A,
           B = initialTriangle.B,
@@ -31560,14 +31571,15 @@ var InitialTriangle = function (_React$Component) {
           onMouseMove: this.handleMouseMove,
           width: side,
           height: height,
-          viewBox: '0 0 ' + (side + 10) + ' ' + height,
+          viewBox: '0 0 ' + (side + 10) + ' ' + (height + 10),
           xmlns: 'http://www.w3.org/2000/svg'
         },
         _react2.default.createElement('path', { d: pathData, fill: 'none', stroke: 'none' }),
         _react2.default.createElement(InnerLines, {
           triangle: initialTriangle,
           crtRecDepth: 0,
-          recursionLimit: this.state.recursionLimit
+          recursionLimit: this.state.recursionLimit,
+          trianglesLimit: this.state.trianglesLimit
         })
       );
     }
@@ -31576,8 +31588,18 @@ var InitialTriangle = function (_React$Component) {
   return InitialTriangle;
 }(_react2.default.Component);
 
+var style = {
+  margin: '0 auto',
+  width: '600px'
+};
+
 var App = function App() {
-  return _react2.default.createElement(InitialTriangle, null);
+  return _react2.default.createElement(
+    'div',
+    { style: style },
+    ' ',
+    _react2.default.createElement(InitialTriangle, null)
+  );
 };
 
 exports.default = App;
