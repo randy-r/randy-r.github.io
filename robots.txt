@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://randy-r.github.io/stedux/sitemap.xml
