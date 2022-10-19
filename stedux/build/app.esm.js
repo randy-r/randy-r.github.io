@@ -1,1 +1,1 @@
-import{p as t,b as o}from"./p-415294ab.js";(()=>{const o=import.meta.url,p={};return""!==o&&(p.resourcesUrl=new URL(".",o).href),t(p)})().then((t=>o([["p-57399f96",[[1,"app-root"],[1,"stedux-counter"],[1,"stedux-async"],[4,"ui-jumbo"],[4,"ui-btn"]]]],t)));
+import{p as t,b as o}from"./p-415294ab.js";(()=>{const o=import.meta.url,p={};return""!==o&&(p.resourcesUrl=new URL(".",o).href),t(p)})().then((t=>o([["p-c035b1fc",[[1,"app-root"],[1,"stedux-counter"],[1,"stedux-async"],[4,"ui-jumbo"],[4,"ui-btn"]]]],t)));
