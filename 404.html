@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>404 - redirect</title>
+    <script>
+      function main() {
+        const pathname = location.pathname;
+        const roots = ['/stenimator/', '/stedux/'];
+        for (const root of roots) {
+          if (pathname.startsWith(root)) {
+            location.replace(root);
+            return;
+          }
+        }
+        location.replace('/');
+        return;
+      }
+      main();
+    </script>
+    <style>
+      body {
+        background-color: steelblue;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
