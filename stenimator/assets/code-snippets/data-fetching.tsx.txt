@@ -1,0 +1,9 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">Stenimator</span>
+  <span class="hljs-attr">criteria</span>=<span class="hljs-string">{loading}</span>
+  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;base-data&quot;</span>
+  <span class="hljs-attr">enter</span>=<span class="hljs-string">&quot;enter-top-rotate&quot;</span>
+  <span class="hljs-attr">exit</span>=<span class="hljs-string">&quot;exit-bottom-rotate&quot;</span>
+&gt;</span>
+  {loading === true &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;spinner&quot;</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;spinner&quot;</span> /&gt;</span>}
+  {loading === false &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;data&quot;</span>&gt;</span> {data.name} <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>}
+<span class="hljs-tag">&lt;/<span class="hljs-name">Stenimator</span>&gt;</span>

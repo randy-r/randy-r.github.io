@@ -1,0 +1,101 @@
+/*
+  Global App CSS
+  ----------------------
+  Use this file for styles that should be applied to all components.
+  For example, "font-family" within the "body" selector is a CSS property
+  most apps will want applied to all components.
+
+  Any global CSS variables should also be applied here.
+*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+:root {
+  --cyan9: rgb(11, 114, 133);
+  /* --old: rgba(152, 206, 168, 1); */
+  --bg-light: #fff;
+  --brand-light: var(--cyan-9);
+  --brand2-light: hsl(189deg 100% 17%);
+  --effect-light: rgba(137, 160, 144, 1);
+  --surface1-light: rgba(255, 255, 255, 1);
+
+  --bg-dark: #var(--gray-9);
+
+  --brand-dark: var(--cyan-5); /* #22b8cf */
+  --brand2-dark: hsl(188deg 100% 88%);
+  --effect-dark: rgb(33, 52, 39);
+  --surface1-dark: var(--gray-9);
+}
+
+:root {
+  --bg: var(--bg-light);
+  --brand: var(--brand-light);
+  --brand2: var(--brand2-light);
+  --effect: var(--effect-light);
+  --surface1: var(--surface1-light);
+}
+
+.bg-effect {
+  filter: contrast(500%) brightness(120%);
+  background: radial-gradient(circle at -50% -50%, rgb(11, 114, 133, 0.3), rgba(0, 0, 0, 0)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.21' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  filter: contrast(300%) brightness(120%);
+
+  background: radial-gradient(circle at -50% -50%, rgb(11, 114, 133, 0.2), rgba(0, 0, 0, 0)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.21' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--bg-dark);
+    --brand: var(--brand-dark);
+    --brand2: var(--brand2-dark);
+    --effect: var(--effect-dark);
+    --surface1: var(--surface1-dark);
+  }
+
+  .bg-effect {
+    filter: contrast(200%) brightness(40%);
+    filter: contrast(200%) brightness(20%);
+    background: radial-gradient(circle at -50% -50%, rgb(6, 49, 43), rgba(0, 0, 0, 0)),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.21' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+html,
+body {
+  /* height: 100%; */
+  width: 100%;
+  position: relative;
+}
+
+html {
+  overflow-y: scroll;
+  background-color: var(--surface1);
+}
+
+.bg-effect {
+  position: absolute;
+  outline-offset: -3px;
+  margin-top: 47px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-size: cover;
+  z-index: -1;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

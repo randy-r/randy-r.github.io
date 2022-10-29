@@ -1,0 +1,31 @@
+<span class="hljs-comment">/* ...styles from the previous example  */</span>
+
+<span class="hljs-selector-class">.enter-reverse</span> {
+  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">500ms</span>;
+  <span class="hljs-attribute">animation-name</span>: enter-left;
+}
+
+<span class="hljs-selector-class">.exit-reverse</span> {
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">500ms</span>;
+  <span class="hljs-attribute">animation-name</span>: exit-left;
+}
+
+<span class="hljs-keyword">@keyframes</span> enter-left {
+  <span class="hljs-selector-tag">from</span> {
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">100%</span>);
+  }
+  <span class="hljs-selector-tag">to</span> {
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">0px</span>);
+  }
+}
+
+<span class="hljs-keyword">@keyframes</span> exit-left {
+  <span class="hljs-selector-tag">from</span> {
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">0</span>);
+  }
+  <span class="hljs-selector-tag">to</span> {
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(<span class="hljs-number">100%</span>);
+  }
+}

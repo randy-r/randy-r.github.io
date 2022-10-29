@@ -1,0 +1,1 @@
+<span class="hljs-comment">/* ...same styles from the previous example  */</span>
